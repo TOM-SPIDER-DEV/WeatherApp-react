@@ -1,7 +1,10 @@
 import React from "react";
 import { LocationSVG } from "../svg/svgs";
 
-function ChangeLocation(props: { onInputChange: (value: string) => void }) {
+function ChangeLocation(props: {
+  onInputChange: (value: string) => void;
+  error: false | true;
+}) {
   const [inputValue, setInputValue] = React.useState("");
   const [showInput, setShowInput] = React.useState(false);
 
@@ -26,7 +29,9 @@ function ChangeLocation(props: { onInputChange: (value: string) => void }) {
       <div className="flex justify-center items-center relative">
         <input
           type="text"
-          className="rounded-xl w-11/12 h-10 pr-1 focus:outline-none focus:border-none text-white text-center placeholder-white text-lg bg-gradient"
+          className={`rounded-xl w-11/12 h-10 pr-1 focus:outline-none focus:border-none text-white text-center placeholder-white text-lg bg-gradient ${
+            props.error && "text-red"
+          }`}
           placeholder="Change Location"
           onMouseEnter={handleMouseEnter}
           onChange={handleChange}
@@ -37,9 +42,15 @@ function ChangeLocation(props: { onInputChange: (value: string) => void }) {
           }`}
         />
       </div>
-      <div className="flex justify-center items-center">
+
+      <div className="flex justify-center items-center flex-col">
+        {props.error && (
+          <p className="text-center text-red-900 text-xl p-2 text-red ">
+            Location not found. Please enter a valid location.
+          </p>
+        )}
         <button
-          className="rounded-xl w-11/12 h-10  text-white text-center placeholder-white text-lg m-4  bg-gradient"
+          className="rounded-xl w-11/12 h-10  text-white text-center placeholder-white text-lg m-4  bg-gradient "
           onClick={handleClick}
         >
           <span
