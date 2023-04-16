@@ -66,7 +66,7 @@ const fetchFindPlacesWithLocation = async (
 
 const fetchDailyWeatherData = async (
   props: Geolocation
-): Promise<RootDailyWeatherObject> => {
+): Promise<RootDailyWeatherObject[]> => {
   const params = {
     lat: props.lat,
     lon: props.lon,
@@ -77,7 +77,8 @@ const fetchDailyWeatherData = async (
 
   const res = await api("daily", { params });
   const data = await res.data;
-  return data.daily.data.slice(1, 5);
+  const transformedData = data.daily.data.slice(1, 5);
+  return transformedData;
 };
 
 export {

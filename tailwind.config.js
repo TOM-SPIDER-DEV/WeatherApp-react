@@ -4,7 +4,8 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        brand: "#1C2128",
+        background: "#1C2128",
+        red: "red",
       },
       backgroundImage: {
         gradient:

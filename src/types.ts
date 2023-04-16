@@ -60,14 +60,6 @@ export interface RootPlaceObject {
 /* ***************************** */
 
 export interface RootDailyWeatherObject {
-  daily: Daily;
-}
-
-interface Daily {
-  data: Datum[];
-}
-
-export interface Datum {
   cloud_cover: number;
   day: Date;
   dew_point: number;
@@ -94,6 +86,7 @@ export interface Datum {
   wind_chill_max: number;
   wind_chill_min: number;
 }
+export interface Datum {}
 
 interface Probability {
   freeze: number;
