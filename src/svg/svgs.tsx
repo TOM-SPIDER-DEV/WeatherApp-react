@@ -1,9 +1,9 @@
 import React from "react";
 
 import { ReactComponent as SunnySVG } from "./clear-day.svg";
-import { ReactComponent as MostlySunnySVG } from "./partly-cloudy-day.svg";
-import { ReactComponent as NightSVG } from "./clear-night.svg";
-import { ReactComponent as CloudySVG } from "./cloudy.svg";
+// import { ReactComponent as MostlySunnySVG } from "./partly-cloudy-day.svg";
+// import { ReactComponent as NightSVG } from "./clear-night.svg";
+// import { ReactComponent as CloudySVG } from "./cloudy.svg";
 
 const SummarySVG = (props: { className: string }) => (
   <svg

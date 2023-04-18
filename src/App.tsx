@@ -1,135 +1,17 @@
-import { useState, useEffect } from "react";
 import "./App.css";
-import {
-  fetchFindPlacesWithText,
-  fetchFindPlacesWithLocation,
-  fetchWeatherData,
-  fetchDailyWeatherData,
-} from "./fetchWeatherData";
-import {
-  RootWeatherObject,
-  DaysData,
-  RootPlaceObject,
-  RootDailyWeatherObject,
-} from "./types";
+import { useWeatherReducer } from "./useReducer";
+
 import { SummarySVG } from "./svg/svgs";
+
 import { InfoDayBox } from "./weatherForecast/InfoDayBox";
 import { WeatherDetails } from "./weatherForecast/WeatherDetails";
-import { WeatherSummary } from "./weatherSummary/WeatherSummary";
-import { SummaryDay } from "./weatherSummary/SummaryDay";
-import { getDays } from "./dates";
 import { ChangeLocation } from "./weatherForecast/changeLocation";
 
-interface WeatherState {
-  error: boolean;
-  weatherData?: RootWeatherObject;
-  placeData?: RootPlaceObject;
-  weekData?: DaysData;
-  city: string;
-  inputComplete: boolean;
-  dailyData?: RootDailyWeatherObject[];
-}
+import { WeatherSummary } from "./weatherSummary/WeatherSummary";
+import { SummaryDay } from "./weatherSummary/SummaryDay";
 
 function App() {
-  const [state, setState] = useState<WeatherState>({
-    error: false,
-    city: "",
-    inputComplete: false,
-  });
-
-  const handleClick = (value: string) => {
-    setState({
-      ...state,
-      city: value,
-    });
-  };
-
-  useEffect(() => {
-    const fetchDataWithGeolocation = async (position: GeolocationPosition) => {
-      const { latitude, longitude } = position.coords;
-
-      const lat = String(latitude);
-      const lon = String(longitude);
-
-      const placeInfo = await fetchFindPlacesWithLocation({ lat, lon });
-
-      const weatherInfo = await fetchWeatherData({ lat, lon });
-      const dailyWeatherData = await fetchDailyWeatherData({
-        lat: placeInfo.lat,
-        lon: placeInfo.lon,
-      });
-
-      const days = await getDays();
-      setState({
-        ...state,
-        placeData: placeInfo,
-        weatherData: weatherInfo,
-        dailyData: dailyWeatherData,
-        weekData: days,
-      });
-    };
-
-    const fetchDataWithoutGeolocation = async () => {
-      try {
-        const placeInfo = await fetchFindPlacesWithText(state.city);
-        setState({
-          ...state,
-          placeData: placeInfo,
-        });
-
-        const weatherInfo = await fetchWeatherData({
-          lat: placeInfo.lat,
-          lon: placeInfo.lon,
-        });
-
-        const dailyWeatherData = await fetchDailyWeatherData({
-          lat: placeInfo.lat,
-          lon: placeInfo.lon,
-        });
-
-        const days = await getDays();
-        setState({
-          ...state,
-          error: false,
-          placeData: placeInfo,
-          weatherData: weatherInfo,
-          dailyData: dailyWeatherData,
-          weekData: days,
-        });
-      } catch (error) {
-        setState({
-          ...state,
-          error: true,
-        });
-        console.error("Error: " + error);
-      }
-    };
-
-    if (navigator.geolocation && !state.city) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          fetchDataWithGeolocation(position);
-          setState({
-            ...state,
-            inputComplete: true,
-          });
-        },
-        (error) => {
-          console.error("Error: " + error);
-          setState({
-            ...state,
-            inputComplete: false,
-          });
-        }
-      );
-    } else {
-      fetchDataWithoutGeolocation();
-      setState({
-        ...state,
-        inputComplete: true,
-      });
-    }
-  }, [state.city]);
+  const { state, setCity } = useWeatherReducer();
 
   const weatherDetails = {
     precipitation: state.weatherData?.current.precipitation.total + "%",
@@ -172,7 +54,7 @@ function App() {
             </ol>
 
             <ChangeLocation
-              onInputChange={(value: string) => handleClick(value)}
+              onInputChange={(value: string) => setCity(value)}
               error={state.error}
             />
           </section>
@@ -183,7 +65,7 @@ function App() {
           <section className="w-1/3 p-8 bg-background rounded-2xl">
             <ChangeLocation
               error={state.error}
-              onInputChange={(value: string) => handleClick(value)}
+              onInputChange={(value: string) => setCity(value)}
             />
           </section>
         </div>
