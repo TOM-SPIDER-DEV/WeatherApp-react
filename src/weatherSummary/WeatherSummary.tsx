@@ -1,12 +1,13 @@
-import { SunnySVG } from "../svg/svgs";
-
-function WeatherSummary(props: {
+import { WeatherIcon } from "../svg/svgs";
+interface Props {
   temp: number | undefined;
   summary: string | undefined;
-}) {
+  iconId: number;
+}
+function WeatherSummary(props: Props) {
   return (
     <div className="mb-14">
-      <SunnySVG className="ml-8 w-32 h-32" />
+      <WeatherIcon iconId={props.iconId} />
       <p className="ml-8 mt-8 font-bold text-white text-5xl">{props.temp}°</p>
       <p className="ml-8 mt-8 font-medium text-white text-2xl">
         {props.summary}

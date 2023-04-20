@@ -28,6 +28,7 @@ function App() {
           >
             <SummarySVG className="absolute h-full top-0 rounded-2xl opacity-20  " />
             <WeatherSummary
+              iconId={state.weatherData?.current.icon_num || 1}
               temp={state.weatherData?.current.temperature}
               summary={state.weatherData?.current.summary}
             />
@@ -46,6 +47,7 @@ function App() {
             <ol className="flex justify-center items-center m-4">
               {state.dailyData?.map((dayData) => (
                 <InfoDayBox
+                  iconId={dayData.icon}
                   temp={dayData.temperature}
                   day={state.weekData?.Days[1]}
                   key={dayData.temperature}
