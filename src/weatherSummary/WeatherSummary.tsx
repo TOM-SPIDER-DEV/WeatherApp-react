@@ -7,7 +7,7 @@ interface Props {
 function WeatherSummary(props: Props) {
   return (
     <div className="mb-14">
-      <WeatherIcon iconId={props.iconId} />
+      <WeatherIcon iconId={props.iconId} className="h-48 w-48 relative top-7" />
       <p className="ml-8 mt-8 font-bold text-white text-5xl">{props.temp}°</p>
       <p className="ml-8 mt-8 font-medium text-white text-2xl">
         {props.summary}

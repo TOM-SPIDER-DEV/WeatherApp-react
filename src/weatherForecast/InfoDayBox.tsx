@@ -6,10 +6,12 @@ interface Props {
 }
 function InfoDayBox(props: Props) {
   return (
-    <li className="w-32 h-48 rounded-xl m-1 bg-gray-800 flex justify-center items-center flex-col text-center">
-      <WeatherIcon iconId={props.iconId} />
-      <p className="text-center text-md mt-4 mb-2 text-white">{props.day}</p>
-      <p className="font-bold text-center text-2xl  text-white">
+    <li className="w-32 h-48 sm:w-24 sm:h-40 lg:p-8  rounded-xl m-1 bg-gray-800 flex justify-center items-center flex-col text-center">
+      <WeatherIcon iconId={props.iconId} className="w-32 h-32" />
+      <p className="text-center text-md sm:text-sm mt-4 mb-2 text-white relative bottom-6">
+        {props.day}
+      </p>
+      <p className="font-bold text-center text-2xl sm:text-xl text-white relative bottom-6">
         {props.temp}°
       </p>
     </li>

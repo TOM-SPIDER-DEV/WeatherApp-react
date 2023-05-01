@@ -7,7 +7,7 @@ import {
 const api = axios.create({
   baseURL: "https://ai-weather-by-meteosource.p.rapidapi.com/",
   headers: {
-    "X-RapidAPI-Key": "544cf7eee2msh8d63fed7e3e9de0p1ce5a5jsnb9acb33746ee",
+    "X-RapidAPI-Key": "cabb8e460bmshf99639385117a3cp1b4bd2jsn4d98d7750ee8",
     "X-RapidAPI-Host": "ai-weather-by-meteosource.p.rapidapi.com",
   },
 });
@@ -78,6 +78,7 @@ const fetchDailyWeatherData = async (
   const res = await api("daily", { params });
   const data = await res.data;
   const transformedData = data.daily.data.slice(1, 5);
+
   return transformedData;
 };
 

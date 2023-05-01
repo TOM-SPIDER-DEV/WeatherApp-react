@@ -1,4 +1,4 @@
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 
 import {
   fetchFindPlacesWithText,
@@ -15,8 +15,10 @@ import {
 } from "./types";
 
 import { getDays } from "./dates";
+
 interface WeatherState {
   error: boolean;
+  loading: boolean;
   weatherData?: RootWeatherObject;
   placeData?: RootPlaceObject;
   weekData?: DaysData;
@@ -28,12 +30,15 @@ interface WeatherState {
 type WeatherAction =
   | { type: "SET_CITY"; payload: string }
   | { type: "FETCH_DATA"; payload: WeatherState }
-  | { type: "FETCH_ERROR" };
+  | { type: "FETCH_ERROR" }
+  | { type: "FETCH_START" }
+  | { type: "FETCH_COMPLETE" };
 
 const initialState: WeatherState = {
   error: false,
   city: "",
   inputComplete: false,
+  loading: false,
 };
 
 function weatherReducer(
@@ -46,16 +51,24 @@ function weatherReducer(
         ...state,
         city: action.payload,
       };
+    case "FETCH_START":
+      return {
+        ...state,
+        loading: true,
+      };
     case "FETCH_DATA":
       return {
         ...state,
         ...action.payload,
+        loading: false,
       };
     case "FETCH_ERROR":
       return {
         ...state,
         error: true,
+        loading: false,
       };
+
     default:
       return state;
   }
@@ -68,84 +81,100 @@ function useWeatherReducer() {
     dispatch({ type: "SET_CITY", payload: value });
   };
 
-  const fetchDataWithGeolocation = async (position: GeolocationPosition) => {
-    const { latitude, longitude } = position.coords;
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchDataWithGeolocation = async (
+        position: GeolocationPosition
+      ) => {
+        const { latitude, longitude } = position.coords;
 
-    const lat = String(latitude);
-    const lon = String(longitude);
+        const lat = String(latitude);
+        const lon = String(longitude);
 
-    const placeData = await fetchFindPlacesWithLocation({ lat, lon });
+        dispatch({ type: "FETCH_START" });
 
-    const weatherData = await fetchWeatherData({ lat, lon });
-    const dailyData = await fetchDailyWeatherData({
-      lat: placeData.lat,
-      lon: placeData.lon,
-    });
+        try {
+          const placeData = await fetchFindPlacesWithLocation({ lat, lon });
 
-    const weekData = await getDays();
+          const weatherData = await fetchWeatherData({ lat, lon });
+          const dailyData = await fetchDailyWeatherData({
+            lat: placeData.lat,
+            lon: placeData.lon,
+          });
 
-    dispatch({
-      type: "FETCH_DATA",
-      payload: {
-        ...state,
-        placeData,
-        weatherData,
-        dailyData,
-        weekData,
-        inputComplete: true,
-      },
-    });
-  };
+          const weekData = getDays();
 
-  const fetchDataWithoutGeolocation = async () => {
-    try {
-      const placeData = await fetchFindPlacesWithText(state.city);
-
-      const weatherData = await fetchWeatherData({
-        lat: placeData.lat,
-        lon: placeData.lon,
-      });
-
-      const dailyData = await fetchDailyWeatherData({
-        lat: placeData.lat,
-        lon: placeData.lon,
-      });
-
-      const weekData = await getDays();
-
-      dispatch({
-        type: "FETCH_DATA",
-        payload: {
-          ...state,
-          error: false,
-          placeData,
-          weatherData,
-          dailyData,
-          weekData,
-          inputComplete: true,
-        },
-      });
-    } catch (error) {
-      dispatch({ type: "FETCH_ERROR" });
-      console.error("Error: " + error);
-    }
-  };
-
-  (async function fetchData() {
-    if (navigator.geolocation && !state.city) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          fetchDataWithGeolocation(position);
-        },
-        (error) => {
+          dispatch({
+            type: "FETCH_DATA",
+            payload: {
+              ...state,
+              placeData,
+              weatherData,
+              dailyData,
+              weekData,
+              inputComplete: true,
+            },
+          });
+        } catch (error) {
+          dispatch({ type: "FETCH_ERROR" });
           console.error("Error: " + error);
         }
-      );
-    } else {
-      fetchDataWithoutGeolocation();
-    }
-  })();
+      };
 
+      const fetchDataWithoutGeolocation = async () => {
+        dispatch({ type: "FETCH_START" });
+
+        try {
+          const placeData = await fetchFindPlacesWithText(state.city);
+
+          const weatherData = await fetchWeatherData({
+            lat: placeData.lat,
+            lon: placeData.lon,
+          });
+
+          const dailyData = await fetchDailyWeatherData({
+            lat: placeData.lat,
+            lon: placeData.lon,
+          });
+
+          const weekData = await getDays();
+
+          dispatch({
+            type: "FETCH_DATA",
+            payload: {
+              ...state,
+              error: false,
+              placeData,
+              weatherData,
+              dailyData,
+              weekData,
+              inputComplete: true,
+            },
+          });
+        } catch (error) {
+          dispatch({ type: "FETCH_ERROR" });
+          console.error("Error: " + error);
+        }
+      };
+
+      (async () => {
+        if (navigator.geolocation && !state.city) {
+          navigator.geolocation.getCurrentPosition(
+            (position) => {
+              fetchDataWithGeolocation(position);
+            },
+            (error) => {
+              console.error("Error: " + error);
+            }
+          );
+        } else {
+          fetchDataWithoutGeolocation();
+        }
+      })();
+    };
+    fetchData();
+  }, [state.city]);
   return { state, setCity };
 }
+
 export { useWeatherReducer };

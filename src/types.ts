@@ -86,7 +86,6 @@ export interface RootDailyWeatherObject {
   wind_chill_max: number;
   wind_chill_min: number;
 }
-export interface Datum {}
 
 interface Probability {
   freeze: number;

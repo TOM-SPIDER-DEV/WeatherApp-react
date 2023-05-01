@@ -1,125 +1,133 @@
-import { ReactSVG } from "react-svg";
+import NotAvailable from "./not-available.svg";
+import ClearDay from "./clear-day.svg";
+import PartlyCloudyDay from "./partly-cloudy-day.svg";
+import Cloudy from "./cloudy.svg";
+import OvercastDay from "./overcast-day.svg";
+import Fog from "./fog.svg";
+import LightRain from "./extreme-hail.svg";
+import Rain from "./rain.svg";
+import ThunderstormsDay from "./thunderstorms-day.svg";
+import Sleet from "./sleet.svg";
+import Snow from "./snow.svg";
+import ThunderstormsDaySnow from "./thunderstorms-day-snow.svg";
+import ClearNight from "./clear-night.svg";
+import PartlyCloudyNight from "./partly-cloudy-night.svg";
+import OvercastNight from "./overcast-night.svg";
+import ThunderstormsNight from "./thunderstorms-night.svg";
+import ThunderstormsNightSnow from "./thunderstorms-night-snow.svg";
+import { useEffect, useState } from "react";
 
-function WeatherIcon(props: { iconId: number }) {
-  const style = "mt-1 w-20 h-20 fill-white";
-  switch (props.iconId) {
+const Icon = ({ iconId }: { iconId: number }) => {
+  switch (iconId) {
     case 1:
       // Not availble
-      return <ReactSVG src="./not-available.svg" className={style} />;
+      return <img src={NotAvailable} />;
 
     case 2:
       // Sunny
-      return <ReactSVG src="./clear-day.svg" className={style} />;
+      return <img src={ClearDay} />;
 
-    case 3 | 4:
+    case 3:
+    case 4:
       // Partly sunny and mostly sunny
-      // Mostly cloudy
-      return <ReactSVG src="./partly-cloudy-day.svg" className={style} />;
+      return <img src={PartlyCloudyDay} />;
 
+    case 5:
     case 6:
+      // Mostly cloudy
       // Cloudy
-      return <ReactSVG src="./cloudy.svg" className={style} />;
+      return <img src={Cloudy} />;
 
-    case 7 | 8:
+    case 7:
+    case 8:
       // Overcast
       // Overcast with low clouds
-      return <ReactSVG src="./overcast-day.svg" className={style} />;
+      return <img src={OvercastDay} />;
 
     case 9:
       // Fog
-      return <ReactSVG src="./fog.svg" />;
+      return <img src={Fog} />;
 
     case 10:
       // Light rain
-      return <ReactSVG src="./extreme-hail.svg" className={style} />;
+      return <img src={LightRain} />;
 
-    case 11 | 12 | 13:
+    case 11:
+    case 12:
+    case 13:
       // Rain
       // Possible rain
       // Rain shower
-      return <ReactSVG src="./rain.svg" className={style} />;
+      return <img src={Rain} />;
 
     case 14:
+    case 15:
       // Thunderstorm
       // Local thunderstorms
-      return <ReactSVG src="./thunderstorms-day.svg" className={style} />;
+      return <img src={ThunderstormsDay} />;
 
     case 16:
       // Light snow
-      return <ReactSVG src="./sleet.svg" className={style} />;
+      return <img src={Sleet} />;
 
-    case 17 | 18 | 19 | 34:
+    case 17:
+    case 18:
+    case 19:
       // Snow
       // Possible snow
       // Snow shower
-      // Snow shower (night)
-      return <ReactSVG src="./snow.svg" className={style} />;
+      return <img src={Snow} />;
 
-    case 20 | 21 | 22 | 23 | 24:
+    case 20:
+    case 21:
+    case 22:
+    case 23:
+    case 24:
       // Rain and snow
       // Possible rain and snow
-      return <ReactSVG src="./thunderstorms-day-snow.svg" className={style} />;
-
+      return <img src={ThunderstormsDaySnow} />;
+    case 25:
+      // Hail
+      return <img src={LightRain} />;
     case 26:
       // Clear (night)
-      return <ReactSVG src="./clear-night.svg" className={style} />;
-
-    case 27 | 28:
+      return <img src={ClearNight} />;
+    case 27:
+    case 28:
+    case 29:
       // Mostly clear (night)
       // Partly clear (night)
       // Mostly cloudy (night)
-      return <ReactSVG src="./partly-cloudy-night.svg" className={style} />;
-
+      return <img src={PartlyCloudyNight} />;
     case 30:
       // Cloudy (night)
-      return <ReactSVG src="./cloudy.svg" className={style} />;
-
+      return <img src={Cloudy} />;
     case 31:
       // Overcast with low clouds (night)
-
-      return <ReactSVG src="./overcast-night.svg" className={style} />;
-
-    case 32 | 33:
+      return <img src={OvercastNight} />;
+    case 32:
+    case 33:
       // Rain shower (night)
       // Local thunderstorms (night)
-      return <ReactSVG src="./thunderstorms-night.svg.svg" className={style} />;
-
-    case 35 | 36:
+      return <img src={ThunderstormsNight} />;
+    case 34:
+    case 35:
+    case 36:
       // Rain and snow (night)
-      return (
-        <ReactSVG src="./thunderstorms-night-snow.svg.svg" className={style} />
-      );
-
+      return <img src={ThunderstormsNightSnow} />;
     default:
       // Handle the case when the weather icon is not recognized
-      return <ReactSVG src="./not-available.svg" className={style} />;
+      return <img src={NotAvailable} />;
   }
-}
+};
 
-const SummarySVG = (props: { className: string }) => (
-  <svg
-    viewBox="0 0 493 666"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-    xmlnsXlink="http://www.w3.org/1999/xlink"
-    className={props.className}
-  >
-    <rect width="493" height="666" fill="url(#pattern0)" />
-    <defs>
-      <pattern
-        id="pattern0"
-        patternContentUnits="objectBoundingBox"
-        width="1"
-        height="1"
-      >
-        <use
-          xlinkHref="#image0_105_5"
-          transform="matrix(0.00150101 0 0 0.00111111 -0.00659229 0)"
-        />
-      </pattern>
-    </defs>
-  </svg>
-);
+function WeatherIcon(props: { iconId: number; className: string }) {
+  return (
+    <div className={props.className}>
+      <Icon iconId={props.iconId} />
+    </div>
+  );
+}
 
 const LocationSVG = (props: { classname?: string }) => (
   <svg
@@ -145,4 +153,4 @@ const LocationSVG = (props: { classname?: string }) => (
   </svg>
 );
 
-export { SummarySVG, LocationSVG, WeatherIcon };
+export { LocationSVG, WeatherIcon };

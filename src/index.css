@@ -11,13 +11,13 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  width: 100vw;
-  height: 100vh;
+  overflow-x: hidden;
 }
 #root {
   background-image: url("../public/background.svg");
   width: 100vw;
   height: 100vh;
+  overflow-x: hidden;
 }
 p {
   color: white;
@@ -25,9 +25,4 @@ p {
 ul li {
   display: flex;
   justify-content: space-between;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
