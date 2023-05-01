@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/WeatherApp-react/static/css/main.73b82beb.css",
+    "main.js": "/WeatherApp-react/static/js/main.cce1efd4.js",
+    "static/media/sleet.svg": "/WeatherApp-react/static/media/sleet.ccdf57f0dcfbd97aa60afb661672c110.svg",
+    "static/media/thunderstorms-day-snow.svg": "/WeatherApp-react/static/media/thunderstorms-day-snow.10812d2d9e4501647640ea714a6ca3c5.svg",
+    "static/media/thunderstorms-night-snow.svg": "/WeatherApp-react/static/media/thunderstorms-night-snow.b4ce2963c638f905f14205cfd15fde1d.svg",
+    "static/media/snow.svg": "/WeatherApp-react/static/media/snow.7b5c4da6db9fa38052a6b020fa2415db.svg",
+    "static/media/extreme-hail.svg": "/WeatherApp-react/static/media/extreme-hail.b2c1544ee84ac2f1afe628d04491064f.svg",
+    "static/media/rain.svg": "/WeatherApp-react/static/media/rain.bb1a2bbd4f9a773109029a936db8696e.svg",
+    "static/media/overcast-day.svg": "/WeatherApp-react/static/media/overcast-day.498d76a18ad369b4c695d5bd5ff9bebb.svg",
+    "static/media/overcast-night.svg": "/WeatherApp-react/static/media/overcast-night.46d534f028aa15aaffca51421158a88b.svg",
+    "static/media/thunderstorms-day.svg": "/WeatherApp-react/static/media/thunderstorms-day.2cf9d127c1d744e232a4eaae865945db.svg",
+    "static/media/thunderstorms-night.svg": "/WeatherApp-react/static/media/thunderstorms-night.fd23b9c532b98e1a61fce332151d9c83.svg",
+    "static/media/fog.svg": "/WeatherApp-react/static/media/fog.45e3ebaab41ea3a91900f1f92511e438.svg",
+    "static/media/partly-cloudy-day.svg": "/WeatherApp-react/static/media/partly-cloudy-day.ea586e392a42a659bbeb5d27f80b5fe6.svg",
+    "static/media/partly-cloudy-night.svg": "/WeatherApp-react/static/media/partly-cloudy-night.9b2375a9ce70c22ba993c01536437de9.svg",
+    "static/media/background.svg": "/WeatherApp-react/static/media/background.66ae1b9aa860d389f005.svg",
+    "static/media/clear-day.svg": "/WeatherApp-react/static/media/clear-day.2443856f8624e8e9b8f162496d9e7d07.svg",
+    "static/media/clear-night.svg": "/WeatherApp-react/static/media/clear-night.cc5c9e4da17d8f345e593a1e5014ed37.svg",
+    "static/media/cloudy.svg": "/WeatherApp-react/static/media/cloudy.73c058e1e92399013d7c41be494b9ac0.svg",
+    "index.html": "/WeatherApp-react/index.html",
+    "static/media/not-available.svg": "/WeatherApp-react/static/media/not-available.30bbb31b3565c565aaf1b7c1abd216b1.svg",
+    "main.73b82beb.css.map": "/WeatherApp-react/static/css/main.73b82beb.css.map",
+    "main.cce1efd4.js.map": "/WeatherApp-react/static/js/main.cce1efd4.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.73b82beb.css",
+    "static/js/main.cce1efd4.js"
+  ]
+}
