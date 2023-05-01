@@ -11,8 +11,6 @@ const api = axios.create({
     "X-RapidAPI-Host": "ai-weather-by-meteosource.p.rapidapi.com",
   },
 });
-//cabb8e460bmshf99639385117a3cp1b4bd2jsn4d98d7750ee8
-//544cf7eee2msh8d63fed7e3e9de0p1ce5a5jsnb9acb33746ee
 
 interface Geolocation {
   lat: string;

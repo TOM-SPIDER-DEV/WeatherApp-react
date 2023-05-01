@@ -1,46 +1,40 @@
-# Getting Started with Create React App
+# Weather Application
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a weather application built with React.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Display current weather information, including temperature, precipitation, humidity, and wind speed.
+- Show a summary of the weather for the current day, including an icon, temperature, and summary.
+- Provide a weekly forecast with weather details for each day.
+- Allow users to change the location to get weather information for different places.
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone the repository:
+   `git clone https://github.com/TOM-SPIDER-DEV/WeatherApp-react.git`
+2. Navigate to the project directory:
+   `cd weather-application`
+3. Install the dependencies:
+   `npm install`
+4. Start the application:
+   `npm start`
+5. Open your browser and visit `http://localhost:3000` to view the application.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Usage
 
-### `npm test`
+1. When the application loads, it will attempt to fetch the weather information based on your current location. If you are prompted to allow location access, please grant the permission.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+2. If the location access is denied or unavailable, you can manually enter a city name in the input field and press Enter or click the "Search" button to get the weather information for that location.
 
-### `npm run build`
+3. Once the weather data is retrieved, you will see the current weather summary, including the temperature and a brief description.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+4. The daily forecast section provides an overview of the weather for the next few days. Each day's forecast includes an icon representing the weather condition and the expected temperature.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+5. To change the location, simply enter a new city name in the input field and press Enter or click the "Search" button. The weather information will be updated accordingly.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Technologies Used
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+- React
+- HTML
+- CSS
